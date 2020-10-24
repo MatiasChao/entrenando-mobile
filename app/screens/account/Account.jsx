@@ -3,7 +3,7 @@ import Loading from '../../components/Loading'
 
 import * as firebase from 'firebase'
 import UserLogged from './UserLogged'
-import UserGuest from './UserGuest'
+import Login from './Login'
 
 export default function Account() {
 
@@ -11,10 +11,11 @@ export default function Account() {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
+            console.log("User: ", user)
             !user ? setLogin(false) : setLogin(true)
         })
     }, [])
 
     if(login === null) return <Loading isVisible = {true} text="Cargando..." />
-    return login ? <UserLogged /> : <UserGuest />
+    return login ? <UserLogged /> : <Login />
 }
